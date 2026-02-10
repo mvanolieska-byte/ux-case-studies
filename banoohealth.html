@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanooHealth Case Study | Quick View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage: #8B9D83;
+            --sage-light: #A8B9A0;
+            --sage-dark: #6B7D63;
+            --cream: #F9F7F4;
+            --warm-white: #FFFFFF;
+            --charcoal: #2C2C2C;
+            --gray-medium: #5A5A5A;
+            --gray-light: #E8E6E3;
+            --accent-terracotta: #C4917A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(to bottom, var(--cream) 0%, var(--warm-white) 100%);
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 40px 100px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .project-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--sage-dark);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .read-time {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .version-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: var(--warm-white);
+            border: 1.5px solid var(--sage);
+            border-radius: 6px;
+            color: var(--sage-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .version-link:hover {
+            background: var(--sage-dark);
+            color: var(--warm-white);
+            transform: translateX(4px);
+        }
+
+        .version-link::after {
+            content: ' →';
+        }
+
+        .meta {
+            display: flex;
+            gap: 28px;
+            font-size: 0.95rem;
+            color: var(--gray-medium);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-label {
+            font-weight: 500;
+            color: var(--sage-dark);
+        }
+
+        /* Overview Box */
+        .overview {
+            background: linear-gradient(135deg, #5F7158 0%, #4F6148 100%);
+            color: var(--warm-white);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.1s;
+        }
+
+        .overview-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .overview p {
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+        .section:nth-child(6) { animation-delay: 0.5s; }
+
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--sage-dark);
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .column-card {
+            background: var(--warm-white);
+            border-radius: 10px;
+            padding: 24px;
+            border-left: 3px solid var(--sage);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .column-title {
+            font-weight: 600;
+            color: var(--sage-dark);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .column-card p {
+            font-size: 0.92rem;
+            color: var(--gray-medium);
+            line-height: 1.6;
+        }
+
+        .column-card ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.92rem;
+            color: var(--gray-medium);
+            margin-top: 16px;
+        }
+
+        .column-card li {
+            padding-left: 18px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .column-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--sage);
+            font-weight: bold;
+        }
+
+        /* Compact List */
+        .compact-list {
+            background: var(--warm-white);
+            border-radius: 10px;
+            padding: 24px;
+            border: 1px solid var(--gray-light);
+        }
+
+        .compact-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .compact-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 0.95rem;
+            color: var(--charcoal);
+        }
+
+        .compact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .compact-list strong {
+            color: var(--sage-dark);
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 24px;
+            border-left: 4px solid var(--accent-terracotta);
+            margin: 24px 0;
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            color: var(--sage-dark);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .highlight p {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        /* Quick Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--warm-white);
+            border-radius: 10px;
+            border: 1px solid var(--gray-light);
+        }
+
+        .stat-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--sage-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 24px 80px;
+            }
+
+            .project-title {
+                font-size: 2.2rem;
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="project-title">BanooHealth</h1>
+            <a href="banoohealth-detailed.html" class="version-link">Read full case study</a>
+            <div class="meta" style="margin-top: 20px;">
+                <div class="meta-item">
+                    <span class="meta-label">Role:</span>
+                    <span>Lead UX Researcher (Volunteer)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline:</span>
+                    <span>November–December 2025</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Overview -->
+        <div class="overview">
+            <h2 class="overview-title">At a Glance</h2>
+            <p>I led foundational research for a women's health platform serving Afghan immigrant and refugee communities. My work transformed the team's approach from assumption-driven development to evidence-based, trauma-informed design—pausing MVP development to prevent potential user harm and regulatory risk.</p>
+        </div>
+
+        <!-- Problem & Approach -->
+        <section class="section">
+            <div class="two-column">
+                <div class="column-card">
+                    <h3 class="column-title">The Problem</h3>
+                    <p>An early-stage health initiative wanted to build quickly, but lacked primary understanding of their target users. Building without this foundation risked:</p>
+                    <ul>
+                        <li>Low adoption or user harm</li>
+                        <li>Cultural insensitivity</li>
+                        <li>Regulatory violations</li>
+                        <li>Misalignment with actual needs</li>
+                    </ul>
+                </div>
+                <div class="column-card">
+                    <h3 class="column-title">My Approach</h3>
+                    <p>Designed a lean, ethically rigorous research strategy prioritizing:</p>
+                    <ul>
+                        <li>Trauma-informed methods</li>
+                        <li>Community trust-building</li>
+                        <li>Legal & safety constraints</li>
+                        <li>User segmentation by migration stage</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Activities -->
+        <section class="section">
+            <h2 class="section-title">Research Activities</h2>
+            <div class="compact-list">
+                <ul>
+                    <li><strong>Secondary research:</strong> Analyzed existing studies to identify gaps in knowledge about immigrant healthcare access and stigma</li>
+                    <li><strong>Qualitative interviews (planned):</strong> Designed interview protocols to understand health-seeking behavior and trust boundaries</li>
+                    <li><strong>Community partnerships:</strong> Validated recruitment pathways and shifted stakeholder assumptions about research feasibility</li>
+                    <li><strong>Stakeholder interviews:</strong> Separated belief from evidence and surfaced critical misalignments early</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="two-column">
+                <div class="column-card">
+                    <h3 class="column-title">Privacy as Foundation</h3>
+                    <p>Anonymity and trust aren't features—they're prerequisites. Any traceable system would fail to reach users.</p>
+                </div>
+                <div class="column-card">
+                    <h3 class="column-title">Segmentation Essential</h3>
+                    <p>Needs vary dramatically by migration stage. A single user profile would erase critical differences.</p>
+                </div>
+            </div>
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="column-card">
+                    <h3 class="column-title">Guided Communication</h3>
+                    <p>Clinical language creates barriers. Gentle, structured guidance without medical jargon felt safer.</p>
+                </div>
+                <div class="column-card">
+                    <h3 class="column-title">Legal Clarity Required</h3>
+                    <p>Building without defined legal boundaries posed real risk to users and the organization.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact -->
+        <section class="section">
+            <h2 class="section-title">Impact</h2>
+            
+            <div class="highlight">
+                <p class="highlight-title">Critical Decision</p>
+                <p>Paused primary interviews until IRB-aligned safety protocols were established—an intentional design decision that prioritized participant protection over momentum and set a precedent for ethical rigor.</p>
+            </div>
+
+            <div class="compact-list">
+                <ul>
+                    <li><strong>Paused MVP development</strong> to prevent assumption-driven building</li>
+                    <li><strong>Established research roadmap</strong> as foundation for all future work</li>
+                    <li><strong>Defined user segments</strong> based on migration context, not assumptions</li>
+                    <li><strong>Identified legal risks</strong> before building, preventing regulatory violations</li>
+                    <li><strong>Shifted team culture</strong> from speed-driven to ethics-led design</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Reflection -->
+        <section class="section">
+            <div class="highlight">
+                <p class="highlight-title">Key Takeaway</p>
+                <p>In sensitive domains, advocacy is part of research. My role required slowing the organization down when speed posed risk—challenging assumptions, naming gaps early, and holding firm on ethical standards. The most important research sometimes means knowing when not to build yet.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
